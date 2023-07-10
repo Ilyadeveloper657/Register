@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    body{
+        background: black;
+    }
+    
+    .main{
+        display: grid;
+        place-items: center;
+        margin-left: 500px;
+        margin-right: 400px;
+        margin-top: 70px;
+        border: white;
+        box-shadow: 0 0px 20px rgb(255, 255, 255);
+    }
+    
+    #main{
+        display: grid;
+        place-items: center;
+    }
+    
+    .text_decor{
+        box-shadow: 0 0px 20px rgb(255, 255, 255);
+        margin-top: 50px;
+        margin-left: 30px;
+        margin-right: 30px;
+        margin-bottom: 70px;
+    }
+    .main__text{
+        color: white;
+        padding-top: 40px;
+        padding-left: 40px;
+    }
+    
+    .main_po{
+        color: aliceblue;
+        padding-left: 30px;
+        padding-top: 20px;
+        padding-right: 30px;
+        padding-bottom: 20px;
+    }
+    
+    #lets{
+        margin-bottom: 20px;
+        margin-left: 115px;
+        color: aliceblue;
+        background: grey;
+        padding-left: 8px;
+        padding-right: 8px;
+        padding-bottom: 7px;
+        padding-top: 7px;
+        border-color: greenyellow;
+    }
+    #lets:hover{
+        color: white;
+        background: black;
+        box-shadow: 0 0px 20px rgb(255, 255, 255);
+        transition: 0.4s;
+    }
+    
+    .cart {
+      padding: 20px;
+      display: grid;
+      place-items: center;
+      color: white;
+      box-shadow: 0 0px 7px rgb(255, 255, 255);
+      transition: all 0.3s ease;
+      border-radius: 10px;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 15px;
+      margin-top: 30px;
+      height: 150px;
+    }
+    .cart:hover {
+      box-shadow: 0 0px 18px rgb(255, 255, 255);
+    }
+    #form {
+      display: none;
+      place-items: center;
+    }
+    input {
+      background-color: rgb(0, 0, 0);
+      color: rgb(255, 255, 255);
+      box-shadow: 0 0px 7px rgb(255, 255, 255);
+      transition: all 0.7s ease;
+      padding-left: 5px;
+      padding-right: 5px;
+      padding-bottom: 5px;
+      padding-top: 5px;
+      border-radius: 15px;
+    }
+    input:focus {
+      color: rgb(0, 0, 0);
+      font-weight: bold;
+      box-shadow: 0 0px 18px rgb(255, 255, 255);
+      background-color: white;
+    }
+    .finish-button {
+      margin-top: 100px;
+    }
+    #error {
+      transition: all 0.3s ease;
+      margin-top: 15px;
+      font-family: sans-serif;
+      color: rgb(255, 0, 0);
+      font-weight: bold;
+    }
+    .finish-button {
+      margin-top: 100px;
+      padding-left: 5px;
+      padding-right: 5px;
+      padding-bottom: 5px;
+      padding-top: 5px;
+      color: beige;
+      background: black;
+      text-decoration: none;
+      border: none;
+      box-shadow: 0 0px 10px rgb(255, 255, 255);
+    }
+    .finish-button:hover{
+        color: black;
+        background: white;
+        box-shadow: 0 0px 21px rgb(255, 255, 255);
+        transition: 0.4s;
+    }
+
+    
+</style>
+<body>
+    <div id="main" class="main">
+        <h1 class="main__text">Подготовка к заполнению данных</h1>
+        <div class="text_decor">
+            <p class="main_po">— Данные которые вы введёте не попадут в чужие руки а будут храниться в базе данных компании Pay&List 
+                — После заполнения данные будут рассматриваться и если все верно указанно то вам дают бесплатный доступ к пользованию Pay&List на 20Дней 
+                — Данные нужно вводить праевелтно и без каких либо шуток а не о вы больше не сможешь пройти регистрацию на Pay&List</p>
+            <button id="lets">Начать регистрацию</button>
+        </div>
+    </div>
+</body>
+<form id="form">
+    <div class="cart">
+        <h1>Ожидание заявки</h1>
+        <input type="text" placeholder="Ваше Ф.И.О..." id="FIO">
+        <input type="text" placeholder="Телефонный номер...." id="Phone">
+        <input type="text" placeholder="Эл.почта..." id="Email">
+        <button id="finish", class="finish-button">Отправить заявку</button>
+        <div id="error"></div>
+    </div>
+</form>
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <script>
+        let tg = window.Telegram.WebApp;
+        let lets = document.getElementById('lets')
+        let finish = document.getElementById('finish')
+        tg.expand()
+  
+  
+        lets.addEventListener('click', () => {
+          document.getElementById('main').style.display = 'none';
+          document.getElementById('form').style.display = 'grid';
+        })
+  
+        finish.addEventListener('click', () => {
+          let Fio = document.getElementById('FIO').value;
+          let Phone = document.getElementById('Phone').value;
+          let Email = document.getElementById('Email').value;
+  
+  
+          let data = {
+            FIO: Fio,
+            Phone: Phone,
+            Email: Email
+            
+          }
+          tg.sendData(JSON.stringify(data))
+        })
+  
+    </script>
+</html>
